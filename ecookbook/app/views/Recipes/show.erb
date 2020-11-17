@@ -11,6 +11,14 @@
 <br>
 <h3>Description</h3>
 <p><%= @recipe.description %></p>
+<form method ='get' action ='/recipes/<%=@recipe.id%>/edit' id="edit_recipe">
+<button type='submit'>Edit Recipe</button>
+</form>
+<form method='get' action='/user/account' id='back_to_account'>
+<button type='submit'>Back to account</button>
+</form>
+<br>
 <form method="post" action="/recipes/<%=@recipe.id%>" id="delete_button">
 <input type='hidden' name='_method' value='delete'>
 <button type='submit' value="delete" form='delete_button'>Delete Recipe</button>
+</form>

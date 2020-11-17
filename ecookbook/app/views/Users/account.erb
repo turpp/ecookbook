@@ -1,1 +1,12 @@
-"This will the the user account overview"
+<h1>Welcome <%= @user.username %>!</h1>
+<br>
+<br>
+<h3>All Recipes</h3>
+<ul>
+    <%@user.recipes.each do |recipe|%>
+    <li><a href="/recipes/<%=recipe.id%>"><%=recipe.name%></a></li><br>
+    <% end %>
+</ul>
+<br>
+<br>
+<button type='submit' value='/recipes/new'>Create Recipe</button>

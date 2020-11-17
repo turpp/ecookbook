@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        binding.pry
+        
         @user=User.find_by(params[:user])
         if @user
             session[:user_id]=@user.id
@@ -16,7 +16,8 @@ class UsersController < ApplicationController
     end
 
     get '/user/account' do
-        binding.pry
+        
+        @user=User.find_by(id: session[:user_id])
         erb :'users/account'
     end
 
