@@ -1,0 +1,20 @@
+<h1>Create a New Recipe</h1>
+<br>
+<form method='post' action='/recipes' id='new_recipe'>
+<label for="recipe_name">Name:</label>
+<input type="text" name="recipe[name]" id="recipe_name"><br>
+<label for="ingredients">Ingredients:</label><br>
+<textarea name="recipe[ingredients]">Enter Ingredients with a * in front of each ingredient</textarea><br>
+<label for="steps">Steps:</label><br>
+<textarea name="recipe[steps]">Enter Steps</textarea><br>
+<label for="description">Description:</label><br>
+<textarea name="recipe[description]">Enter description</textarea><br>
+
+<br>
+<input type="submit" value="Create"><br>
+<br>
+<label for="user">Created by(will correct this later)</label>
+<input type="number" name="recipe[user_id]" id='user'>
+</form>
+
+
