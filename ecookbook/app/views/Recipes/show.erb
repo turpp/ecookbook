@@ -11,3 +11,6 @@
 <br>
 <h3>Description</h3>
 <p><%= @recipe.description %></p>
+<form method="post" action="/recipes/<%=@recipe.id%>" id="delete_button">
+<input type='hidden' name='_method' value='delete'>
+<button type='submit' value="delete" form='delete_button'>Delete Recipe</button>
