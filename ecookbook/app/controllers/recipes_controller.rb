@@ -11,8 +11,9 @@ class RecipesController < ApplicationController
     end
 
     post '/recipes' do
-        binding.pry
-        "We made it"
+        recipe=Recipe.create(params[:recipe])
+        redirect :"recipes/#{recipe.id}"
+        
     end
 
     get '/recipes/:id' do
