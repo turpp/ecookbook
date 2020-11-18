@@ -1,8 +1,9 @@
+<h1> Surprise Recipe!</h1>
+
 <h1><%=@recipe.name%>
 <h5><%=@recipe.recipeType.name%></h5>
 <br>
 <h3>Ingredients</h2>
-
 <ul>
     <%@ingredients.each do |i|%>
     <li>-<%=i%><li>

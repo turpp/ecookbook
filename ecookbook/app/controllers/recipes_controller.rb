@@ -7,6 +7,15 @@ class RecipesController < ApplicationController
         erb :"recipes/index"
     end
 
+    get '/recipes/random' do 
+        @recipe=Recipe.all.sample
+        @ingredients=bullet_list(@recipe.ingredients).reject{|i| i==""}
+        @steps=bullet_list(@recipe.steps).reject{|i| i==""}
+        erb :random
+      end
+
+
+  
 
     get '/recipes/new' do
         @recipeType=RecipeType.all
@@ -17,6 +26,10 @@ class RecipesController < ApplicationController
         recipe=Recipe.create(params[:recipe])
         redirect :"recipes/#{recipe.id}"
         
+    end
+
+    get '/recipes/:id/cookmode' do
+
     end
 
     get '/recipes/:id/edit' do
