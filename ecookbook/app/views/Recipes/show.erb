@@ -9,21 +9,15 @@
     <br>
     <% end %>
     </ul>
-
-
-
-
-
-
-
-
-
-
-<h5><%=@recipe.ingredients%></h5>
 <br>
 <br>
 <h3>Steps:</h3>
-<h5><%=@recipe.steps%></h5>
+<ul>
+    <%@steps.each do |i|%>
+    <li>-<%=i%><li>
+    <br>
+    <% end %>
+    </ul>
 <br>
 <br>
 <h3>Description</h3>
