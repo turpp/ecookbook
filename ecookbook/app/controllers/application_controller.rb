@@ -33,6 +33,18 @@ class ApplicationController < Sinatra::Base
     array=string.split("*")
     end
 
+    def something_there(string)
+     string.present?
+    end
+
+
+
+    def valid_bullets(string)
+      string.include?("*")
+    end
+
+
+
 
 
 
