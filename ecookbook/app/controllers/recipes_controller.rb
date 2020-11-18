@@ -37,6 +37,7 @@ class RecipesController < ApplicationController
 
     get '/recipes/:id' do
         @recipe=Recipe.find_by(id: params[:id])
+        @ingredients=bullet_list(@recipe.ingredients).reject{|i| i==""}
         erb :"recipes/show"
     end 
 

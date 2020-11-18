@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
 
     get '/login' do
+        if session[:user_id]
+            redirect 'user/account'
+            #flash message
+        else
         erb :'users/index'
+        end
     end
 
     post '/login' do
@@ -24,7 +29,7 @@ class UsersController < ApplicationController
     end
 
     post '/user/signup' do
-        binding.pry
+        
         if params[:user][:password_digest]==params[:retyped_password]
             user=User.create(params[:user])
             session[:user_id]=user.id

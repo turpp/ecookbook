@@ -2,6 +2,23 @@
 <br>
 <br>
 <h3>Ingredients</h2>
+
+<ul>
+    <%@ingredients.each do |i|%>
+    <li>-<%=i%><li>
+    <br>
+    <% end %>
+    </ul>
+
+
+
+
+
+
+
+
+
+
 <h5><%=@recipe.ingredients%></h5>
 <br>
 <br>
@@ -23,8 +40,13 @@
 </form>
 <% end %>
 
-
+<%if session[:user_id]%>
 <form method='get' action='/user/account' id='back_to_account'>
 <button type='submit'>Back to account</button>
 </form>
+<% else %>
+<form method='get' action='/' id='back_to_homepage'>
+<button type='submit'>Back to Homepage</button>
+</form>
+<% end %>
 <br>

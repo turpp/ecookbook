@@ -8,6 +8,11 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "secret"
 
+
+    get '/' do
+      erb :welcome
+    end
+
   end
 
   helpers do
@@ -21,6 +26,10 @@ class ApplicationController < Sinatra::Base
 
     def authorized(recipe)
       recipe.user_id == session[:user_id]
+    end
+
+    def bullet_list(string)
+    array=string.split("*")
     end
 
 
