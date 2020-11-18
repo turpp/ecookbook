@@ -21,6 +21,7 @@ class RecipesController < ApplicationController
 
     get '/recipes/:id/edit' do
         @recipe=Recipe.find_by(id: params[:id])
+        @recipeType=RecipeType.all
         erb :'recipes/edit'
     end
 

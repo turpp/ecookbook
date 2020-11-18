@@ -48,7 +48,9 @@ class UsersController < ApplicationController
     end
 
     get '/user/account' do
-        
+        @recipes=Recipe.all
+        @recipeType=RecipeType.all
+
         @user=User.find_by(id: session[:user_id])
         erb :'users/account'
     end

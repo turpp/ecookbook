@@ -13,16 +13,23 @@
 <label for="description">Description:</label><br>
 <textarea name="recipe[description]"><%= @recipe.description %></textarea><br>
 
+<%@recipeType.each do |t|%>
+<input type='radio' id="<%t.name%>" name="recipe[recipeType_id]" value='<%=t.id%>' <%if @recipe.recipeType==t%> checked <%end%> >
+<label for='<%t.name%>'><%=t.name%></label>
+<% end %>
+
 <br>
 <input type="submit" value="Edit"><br>
 <br>
-<label for="user">Created by(will correct this later)</label>
-<input type="number" name="recipe[user_id]" value='<%@recipe.user_id%>' id='user'>
+<input type="hidden" name="recipe[user_id]" value="<%=session[:user_id]%>">
+
 </form>
 
 <form method='get' action='/user/account' id='back_to_account'>
 <button type='submit'>Back to account</button>
 </form>
+
+
 <% else %>
 <h1>Your not authorized to edit this article</h1>
 <form method='get' action='/user/account' id='back_to_account'>

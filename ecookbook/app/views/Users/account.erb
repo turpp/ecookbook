@@ -2,11 +2,27 @@
 <br>
 <br>
 <h3>All Recipes</h3>
-<ul>
+
+<%@recipeType.each do |t|%>
     <%@user.recipes.each do |recipe|%>
-    <li><a href="/recipes/<%=recipe.id%>"><%=recipe.name%></a></li><br>
+        <%if recipe.recipeType==t%>
+        <h2><%=t.name%></h2>
+            <%@user.recipes.each do |r|%>
+    
+                <%if r.recipeType_id == t.id%> 
+                <a href="/recipes/<%=r.id%>">
+                <%=r.name%> </a> by <%=r.user.username%>
+    <br>
+                <%end%>
+            <% end %>
+    <br>
+    <br>
+        <%end%>
     <% end %>
-</ul>
+<%end%>
+
+
+
 <br>
 <br>
 <form method='get' action='/recipes/new'>
