@@ -2,12 +2,14 @@ class RecipesController < ApplicationController
     
     get '/recipes' do
         @recipes=Recipe.all
+        @recipeType=RecipeType.all
         
         erb :"recipes/index"
     end
 
 
     get '/recipes/new' do
+        @recipeType=RecipeType.all
         erb :'recipes/new'
     end
 

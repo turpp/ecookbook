@@ -9,12 +9,16 @@
 <textarea name="recipe[steps]">Enter Steps</textarea><br>
 <label for="description">Description:</label><br>
 <textarea name="recipe[description]">Enter description</textarea><br>
-
+<br>
+<%@recipeType.each do |t|%>
+<input type='radio' id="<%t.name%>" name="recipe[recipeType_id]" value='<%=t.id%>'>
+<label for='<%t.name%>'><%=t.name%></label>
+<% end %>
 <br>
 <input type="submit" value="Create"><br>
 <br>
-<label for="user">Created by(will correct this later)</label>
-<input type="number" name="recipe[user_id]" id='user'>
+
+<input type="hidden" name="recipe[user_id]" value="<%=session[:user_id]%>">
 </form>
 
 
