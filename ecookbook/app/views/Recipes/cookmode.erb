@@ -1,11 +1,13 @@
-<h1><%=@recipe.name%>
+<h1>Cookmode!</h1>
+<h2><%=@recipe.name%></h2>
 <h5><%=@recipe.recipeType.name%></h5>
 <br>
 <h3>Ingredients</h2>
 
 <ul>
     <%@ingredients.each do |i|%>
-    <li>-<%=i%><li>
+    <li><input type='checkbox'> <%=i%></input>
+    
     <br>
     <% end %>
     </ul>
@@ -14,7 +16,8 @@
 <h3>Steps:</h3>
 <ul>
     <%@steps.each do |i|%>
-    <li>-<%=i%><li>
+        <li><input type='checkbox'> <%=i%></input>
+
     <br>
     <% end %>
     </ul>
@@ -23,21 +26,6 @@
 <h3>Description</h3>
 <p><%= @recipe.description %></p>
 
-<form method ='get' action ='/recipes/<%=@recipe.id%>/cookmode' id="edit_recipe">
-<button type='submit'>Cookmode!</button>
-</form>
-
-
-<%if @recipe.user_id==session[:user_id]%>
-<form method ='get' action ='/recipes/<%=@recipe.id%>/edit' id="edit_recipe">
-<button type='submit'>Edit Recipe</button>
-</form>
-<br>
-<form method="post" action="/recipes/<%=@recipe.id%>" id="delete_button">
-<input type='hidden' name='_method' value='delete'>
-<button type='submit' value="delete" form='delete_button'>Delete Recipe</button>
-</form>
-<% end %>
 
 <%if session[:user_id]%>
 <form method='get' action='/user/account' id='back_to_account'>

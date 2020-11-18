@@ -29,7 +29,12 @@ class RecipesController < ApplicationController
     end
 
     get '/recipes/:id/cookmode' do
+        @recipe=Recipe.find_by(id: params[:id])
+        @ingredients=bullet_list(@recipe.ingredients).reject{|i| i==""}
+        @steps=bullet_list(@recipe.steps).reject{|i| i==""}
 
+
+        erb :'recipes/cookmode'
     end
 
     get '/recipes/:id/edit' do
