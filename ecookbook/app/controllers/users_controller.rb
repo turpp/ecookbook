@@ -1,28 +1,45 @@
-class UsersController < ApplicationController
+require 'sinatra/flash'
 
+class UsersController < ApplicationController
+    register Sinatra::Flash
     get '/login' do
         if session[:user_id]
-            redirect 'user/account'
-            #flash message
+            flash[:message] = "You are already logged in!"
+            redirect to ('/user/account')
         else
         erb :'users/index'
         end
     end
 
     post '/login' do
-        
-        @user=User.find_by(params[:user])
-        if @user
-            session[:user_id]=@user.id
-            redirect '/user/account'
+        user=User.find_by(username: params[:user][:username])
+        if user
+            if user.password_digest==params[:user][:password_digest]
+                session[:user_id]=user.id
+                redirect '/user/account'
+            else
+                flash[:message]="Username and Password match invalid."
+                redirect to('/login')
+            end
+
         else
-            erb :'users/error'
+            flash[:message]="Invalid username."
+            redirect to('/login')
         end
+
+        # @user=User.find_by(params[:user])
+        # if @user
+        #     session[:user_id]=@user.id
+        #     redirect '/user/account'
+        # else
+        #     erb :'users/error'
+        # end
     end
 
     get '/signup' do
         if is_logged_in
-            "Your already logged in"
+            flash[:message] = "You are already logged in!"
+            redirect to('/user/account')
         else
             erb :'users/signup'
         end
@@ -30,15 +47,19 @@ class UsersController < ApplicationController
 
     post '/user/signup' do
         
-        if params[:user][:password_digest]==params[:retyped_password]
-            user=User.create(params[:user])
-            session[:user_id]=user.id
-            redirect '/user/account'
+        if User.find_by(username: params[:user][:username])
+            flash[:message] = "Username already taken. Try a different username."
+            redirect to('/signup')
         else
-            redirect '/signup'
-            #put in a flash message
+            if params[:user][:password_digest]==params[:retyped_password]
+                user=User.create(params[:user])
+                session[:user_id]=user.id
+                redirect '/user/account'
+            else
+                flash[:message]="Password did not match. Try again"
+                redirect to('/signup')
+            end
         end
-        
     end
 
     get '/logout' do
