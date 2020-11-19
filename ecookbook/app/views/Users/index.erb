@@ -1,13 +1,16 @@
-
 <%=flash[:message]%>
-<form class="form-signin" method="post" action="/login">
- 
-<h1 class="display-4">Welcome to EcookBook!!</h1>
-  <img id='logo' class="rounded mx-auto d-block" src="https://image.flaticon.com/icons/png/512/113/113339.png" alt="" width="72" height="72">
-  <br>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="text" id="inputEmail" class="form-control" placeholder="Username" name=user[username] required autofocus>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" name=user[password_digest] required>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+<h1>Welcome to EcookBook!!</h1>
+<br>
+<br>
+<br>
+<h3>Please Log in</h3>
+<form method="post" action="/login">
+<label for='username'>Username:</label>
+<input type="text" name=user[username] id='username'>
+<label for='password'>Password:</label>
+<input type='password' name=user[password_digest] id='password'>
+<input type='submit' value='Log In' >
 </form>
+<h5> Or Sign Up!</h5>
+<form method='get' action='/signup'>
+<button type='submit' value='submit'>Sign Up</button>
