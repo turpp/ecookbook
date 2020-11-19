@@ -2,19 +2,15 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
-
-  
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
 
-
     get '/' do
       erb :welcome
     end
-
 
   end
 
@@ -40,21 +36,12 @@ class ApplicationController < Sinatra::Base
     end
 
 
-
     def valid_bullets(string)
       string.include?("*")
     end
 
 
-
-
-
-
   end
 
-
-  # get "/" do
-  #   erb :welcome
-  # end
 
 end

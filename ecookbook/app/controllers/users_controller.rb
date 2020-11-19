@@ -12,17 +12,22 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        user=User.find_by(username: params[:user][:username])
-        if user
-            if user.password_digest==params[:user][:password_digest]
-                session[:user_id]=user.id
-                redirect '/user/account'
+        if something_there(params[:user][:username])&&something_there(params[:user][:password_digest])
+            user=User.find_by(username: params[:user][:username])
+            if user
+                if user.password_digest==params[:user][:password_digest]
+                    session[:user_id]=user.id
+                    redirect '/user/account'
+                else
+                    flash[:message]="Username and Password match invalid."
+                    redirect to('/login')
+                end
             else
-                flash[:message]="Username and Password match invalid."
-                redirect to('/login')
+                flash[:message]="Invalid username."
+             redirect to('/login')
             end
         else
-            flash[:message]="Invalid username."
+            flash[:message]="Please enter something in every field"
             redirect to('/login')
         end
     end
