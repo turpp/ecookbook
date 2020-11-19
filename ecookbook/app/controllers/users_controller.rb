@@ -42,19 +42,25 @@ class UsersController < ApplicationController
     end
 
     post '/user/signup' do
+        if something_there(params[:user][:username])&&something_there(params[:user][:password_digest])
+
         
-        if User.find_by(username: params[:user][:username])
-            flash[:message] = "Username already taken. Try a different username."
-            redirect to('/signup')
-        else
-            if params[:user][:password_digest]==params[:retyped_password]
-                user=User.create(params[:user])
-                session[:user_id]=user.id
-                redirect '/user/account'
-            else
-                flash[:message]="Password did not match. Try again"
+            if User.find_by(username: params[:user][:username])
+                flash[:message] = "Username already taken. Try a different username."
                 redirect to('/signup')
+            else
+                if params[:user][:password_digest]==params[:retyped_password]
+                    user=User.create(params[:user])
+                    session[:user_id]=user.id
+                    redirect '/user/account'
+                else
+                    flash[:message]="Password did not match. Try again"
+                    redirect to('/signup')
+                end
             end
+        else
+            flash[:message]="Please fill out all fields."
+            redirect to('/signup')
         end
     end
 
