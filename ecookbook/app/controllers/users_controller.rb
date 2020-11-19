@@ -21,19 +21,10 @@ class UsersController < ApplicationController
                 flash[:message]="Username and Password match invalid."
                 redirect to('/login')
             end
-
         else
             flash[:message]="Invalid username."
             redirect to('/login')
         end
-
-        # @user=User.find_by(params[:user])
-        # if @user
-        #     session[:user_id]=@user.id
-        #     redirect '/user/account'
-        # else
-        #     erb :'users/error'
-        # end
     end
 
     get '/signup' do

@@ -1,9 +1,11 @@
+require 'sinatra/flash'
+
 class RecipesController < ApplicationController
-    
+    register Sinatra::Flash
+
     get '/recipes' do
         @recipes=Recipe.all
         @recipeType=RecipeType.all
-        
         erb :"recipes/index"
     end
 
@@ -14,9 +16,6 @@ class RecipesController < ApplicationController
         erb :random
       end
 
-
-  
-
     get '/recipes/new' do
         @recipeType=RecipeType.all
         erb :'recipes/new'
@@ -25,15 +24,12 @@ class RecipesController < ApplicationController
     post '/recipes' do
         recipe=Recipe.create(params[:recipe])
         redirect :"recipes/#{recipe.id}"
-        
     end
 
     get '/recipes/:id/cookmode' do
         @recipe=Recipe.find_by(id: params[:id])
         @ingredients=bullet_list(@recipe.ingredients).reject{|i| i==""}
         @steps=bullet_list(@recipe.steps).reject{|i| i==""}
-
-
         erb :'recipes/cookmode'
     end
 
@@ -50,9 +46,9 @@ class RecipesController < ApplicationController
     end
 
     delete '/recipes/:id' do
-        
         recipe=Recipe.find_by(id: params[:id])
         recipe.destroy
+        flash[:message]="recipe deleted"
         redirect '/recipes'
     end
 
@@ -62,8 +58,6 @@ class RecipesController < ApplicationController
         @steps=bullet_list(@recipe.steps).reject{|i| i==""}
         erb :"recipes/show"
     end 
-
-
 
 
 end
