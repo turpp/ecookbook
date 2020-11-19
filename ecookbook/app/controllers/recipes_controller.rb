@@ -22,8 +22,22 @@ class RecipesController < ApplicationController
     end
 
     post '/recipes' do
-        recipe=Recipe.create(params[:recipe])
-        redirect :"recipes/#{recipe.id}"
+        valid=params[:recipe].map do |k,v|
+            something_there(v)
+         end
+        
+         if !valid.include?(false) && valid.count==6
+            if valid_bullets(params[:recipe][:ingredients])&& valid_bullets(params[:recipe][:steps])
+                recipe=Recipe.create(params[:recipe])
+                redirect :"recipes/#{recipe.id}"
+            else
+                flash[:message]="Make sure to include * for each bullets in Ingredients and Steps"
+                redirect to('/recipes/new')
+            end
+        else
+            flash[:message]="Please fill out all fields"
+            redirect to('/recipes/new')
+        end
     end
 
     get '/recipes/:id/cookmode' do
