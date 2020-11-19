@@ -54,9 +54,29 @@ class RecipesController < ApplicationController
     end
 
     patch '/recipes/:id' do
-        recipe=Recipe.find_by(id: params[:id])
-        recipe.update(params[:recipe])
-        redirect "recipes/#{recipe.id}"
+
+        valid=params[:recipe].map do |k,v|
+            something_there(v)
+         end
+
+         if !valid.include?(false) && valid.count==6
+            if valid_bullets(params[:recipe][:ingredients])&& valid_bullets(params[:recipe][:steps])
+                recipe=Recipe.find_by(id: params[:id])
+                recipe.update(params[:recipe])
+                flash[:message]="Recipe Edited!"
+
+                redirect "recipes/#{recipe.id}"
+                    else
+                flash[:message]="Make sure to include * for each bullets in Ingredients and Steps"
+                redirect to("recipes/#{params[:id]}/edit")
+            end
+        else
+            flash[:message]="Please fill out all fields"
+            redirect to("recipes/#{params[:id]}/edit")
+        end
+        # recipe=Recipe.find_by(id: params[:id])
+        # recipe.update(params[:recipe])
+        # redirect "recipes/#{recipe.id}"
     end
 
     delete '/recipes/:id' do
