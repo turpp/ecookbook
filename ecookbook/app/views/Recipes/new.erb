@@ -1,13 +1,16 @@
 <%=flash[:message]%>
+
 <h1>Create a New Recipe</h1>
 <br>
 <form method='post' action='/recipes' id='new_recipe'>
 <label for="recipe_name">Name:</label>
 <input type="text" name="recipe[name]" id="recipe_name"><br>
 <label for="ingredients">Ingredients:</label><br>
-<textarea name="recipe[ingredients]">Enter Ingredients with a * in front of each ingredient</textarea><br>
+<h6>IMPORTANT: Enter Ingredients as a bulleted list with * in front of each ingredient. (<a href="/recipes/example">Example</a>)</h6>
+<textarea name="recipe[ingredients]"></textarea><br>
 <label for="steps">Steps:</label><br>
-<textarea name="recipe[steps]">Enter Steps</textarea><br>
+<h6>IMPORTANT: Enter Steps as a bulleted list with * in front of each step. (<a href="/recipes/example">Example</a>)</h6>
+<textarea name="recipe[steps]"></textarea><br>
 <label for="description">Description:</label><br>
 <textarea name="recipe[description]">Enter description</textarea><br>
 <br>

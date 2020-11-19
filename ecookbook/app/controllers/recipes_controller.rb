@@ -16,12 +16,17 @@ class RecipesController < ApplicationController
         erb :random
       end
 
+    get '/recipes/example' do
+        erb :'recipes/example'
+    end
+
     get '/recipes/new' do
         @recipeType=RecipeType.all
         erb :'recipes/new'
     end
 
     post '/recipes' do
+    
         valid=params[:recipe].map do |k,v|
             something_there(v)
          end
@@ -38,6 +43,23 @@ class RecipesController < ApplicationController
             flash[:message]="Please fill out all fields"
             redirect to('/recipes/new')
         end
+
+        #this is if we want to save what they inputed in the new form and put it back to the new form
+        # params[:recipe].each do |k,v|
+            # if v==""  
+              # params[:recipe][k]="blank"
+             #end  
+        #end  
+
+
+        #to make it fill in with info that was typed before. 
+        #take the params info and fill it up with everything needed thats missing
+        #I have to create a new recipe
+        #put value in form set to the new temp recipe
+    
+        #in form I can have it check for a temp recipe by user id with if statment
+
+
     end
 
     get '/recipes/:id/cookmode' do
@@ -93,5 +115,6 @@ class RecipesController < ApplicationController
         erb :"recipes/show"
     end 
 
+   
 
 end
