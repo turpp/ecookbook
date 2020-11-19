@@ -3,6 +3,7 @@ require 'sinatra/flash'
 class UsersController < ApplicationController
     register Sinatra::Flash
     get '/login' do
+       
         if session[:user_id]
             flash[:message] = "You are already logged in!"
             redirect to ('/user/account')
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
+        
         if something_there(params[:user][:username])&&something_there(params[:user][:password_digest])
             user=User.find_by(username: params[:user][:username])
             if user
